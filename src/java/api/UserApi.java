@@ -135,9 +135,9 @@ public class UserApi extends HttpServlet {
                 json.put("name", Outmodel.getName());
                 json.put("phone", Outmodel.getPhone());
                 json.put("password", Outmodel.getPassword());
-
-//                json.put("outCode", Outmodel.getOutCode());
-//                json.put("outMessege", Outmodel.getOutMessege());
+                json.put("outCode", Outmodel.getOutCode());
+                json.put("outMessege", Outmodel.getOutMessege());
+                
                 System.out.println("User Save Json " + json);
                 response.addHeader("Access-Control-Allow-Origin", "*");
                 response.setContentType("application/json");
@@ -163,9 +163,9 @@ public class UserApi extends HttpServlet {
                 User Outmodel = dao.deleteUserData(model);
 
                 json.put("phone", Outmodel.getPhone());
-
-//                json.put("outCode", Outmodel.getOutCode());
-//                json.put("outMessege", Outmodel.getOutMessege());
+                json.put("outCode", Outmodel.getOutCode());
+                json.put("outMessege", Outmodel.getOutMessege());
+                
                 System.out.println("User Delete Json " + json);
                 response.addHeader("Access-Control-Allow-Origin", "*");
                 response.setContentType("application/json");
@@ -200,9 +200,10 @@ public class UserApi extends HttpServlet {
                
                 json.put("phone", Outmodel.getPhone());
                 json.put("password", Outmodel.getPassword());
-
-//                json.put("outCode", Outmodel.getOutCode());
-//                json.put("outMessege", Outmodel.getOutMessege());
+                json.put("outCode", Outmodel.getOutCode());
+                json.put("outMessege", Outmodel.getOutMessege());
+                
+                
                 System.out.println("User password update Json " + json);
                 response.addHeader("Access-Control-Allow-Origin", "*");
                 response.setContentType("application/json");

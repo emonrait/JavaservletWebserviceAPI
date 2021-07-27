@@ -68,12 +68,12 @@ public class UserDao {
         //DBConnectionHandler.getConVentionalConnection();
 
         try {
-
-            //oConn = DBConnectionHandler.getConVentionalConnection();
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            oConn = DBConnectionHandler.getConVentionalConnection();
+            
             //Class.forName("com.mysql.jdbc.Driver");
             //oConn =DriverManager.getConnection("jdbc:mysql://localhost:3306/servletdatabase", "root", "root");
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            oConn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "root");
+            //oConn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "root");
 
             String sql = "INSERT INTO ROOT.SERVLETUSER (NAME, PHONE,PASSWORD,ID) VALUES (?,?,?,?)";
 
@@ -90,17 +90,10 @@ public class UserDao {
             outModel.setName(user.getName());
             outModel.setPhone(user.getPhone());
             outModel.setPassword(user.getPassword());
+            outModel.setOutCode("0");
+            outModel.setOutMessege("Save Successfull");
 
-//            if (ps.executeUpdate())) {
-//                outModel.setName(rs.getString("NAME"));
-//                outModel.setOutCode("0");
-//                outModel.setOutMessege("Login Successfull");
-//
-//            } else {
-//                outModel.setOutCode("1");
-//                outModel.setOutMessege("Login Not Successfull");
-//
-//            }
+
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -116,23 +109,26 @@ public class UserDao {
     public User deleteUserData(User user) {
         User outModel = new User();
         Connection oConn = null;
-       
+
         try {
 
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            oConn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "root");
+            oConn = DBConnectionHandler.getConVentionalConnection();
+            //oConn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "root");
 
             String sql = "DELETE  FROM ROOT.SERVLETUSER WHERE PHONE = ?";
 
             PreparedStatement ps = oConn.prepareStatement(sql);
 
             ps.setString(1, user.getPhone());
+            
 
             ps.executeUpdate();
             System.out.println("sql = " + sql);
 
             outModel.setPhone(user.getPhone());
-
+            outModel.setOutCode("0");
+            outModel.setOutMessege("Delete Successfull");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -149,11 +145,11 @@ public class UserDao {
     public User updateUserData(User user) {
         User outModel = new User();
         Connection oConn = null;
-       
+
         try {
 
-           Class.forName("oracle.jdbc.driver.OracleDriver");
-            oConn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "root");
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            oConn = DBConnectionHandler.getConVentionalConnection();
 
             String sql = "UPDATE ROOT.SERVLETUSER SET PASSWORD=? WHERE PHONE=?";
 
@@ -166,7 +162,8 @@ public class UserDao {
             System.out.println("sql = " + sql);
             outModel.setPassword(user.getPassword());
             outModel.setPhone(user.getPhone());
-
+            outModel.setOutCode("0");
+            outModel.setOutMessege("Update Successfull");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -195,6 +192,6 @@ public class UserDao {
 //
 //        User deleteUser = userDao.deleteUserData(model);
 //        System.out.println("Phone = " + deleteUser.getPhone());
-  }
+    }
 
 }
